@@ -19,7 +19,9 @@ const Home = () => {
   };
 
   const [professores, setProfessores] = useState<Professor[]>([]);
-  const [ordenacao, setOrdenacao] = useState<'nome' | 'departamento' | 'recentes' | 'antigas'>('recentes');
+  const [ordenacao, setOrdenacao] = useState<
+    'nome' | 'departamento' | 'recentes' | 'antigas' | 'id'
+  >('recentes');
   const [filtro, setFiltro] = useState<Professor[]>([]);
 
   const fetchProfessores = async () => {
@@ -80,13 +82,66 @@ const Home = () => {
   return copy;
 };
 
+  const radixSort = (arr: number[]): number[] => {
+    if (arr.length <= 1) return [...arr];
+
+    let result = [...arr];
+    const max = Math.max(...result);
+    let exp = 1;
+
+    while (Math.floor(max / exp) > 0) {
+      const output = new Array(result.length);
+      const count = new Array(10).fill(0);
+
+      for (const num of result) {
+        const digit = Math.floor(num / exp) % 10;
+        count[digit]++;
+      }
+
+      for (let i = 1; i < 10; i++) {
+        count[i] += count[i - 1];
+      }
+
+      for (let i = result.length - 1; i >= 0; i--) {
+        const digit = Math.floor(result[i] / exp) % 10;
+        output[count[digit] - 1] = result[i];
+        count[digit]--;
+      }
+
+      result = output;
+      exp *= 10;
+    }
+
+    return result;
+  };
+
   const professoresOrdenados = (() => {
     if (ordenacao === "nome") {
-      return quickSort(professores, (a, b) => a.nome.localeCompare(b.nome));
+      return quickSort(
+        professores,
+        (a, b) => a.nome.localeCompare(b.nome)
+      );
     }
+
     if (ordenacao === "departamento") {
-      return quickSort(professores, (a, b) => a.departamento.localeCompare(b.departamento));
+      return quickSort(
+        professores,
+        (a, b) => a.departamento.localeCompare(b.departamento)
+      );
     }
+
+    if (ordenacao === "id") {
+      const idsOrdenados = radixSort(
+        professores.map((prof) => prof.id)
+      );
+
+      return idsOrdenados
+        .map((id) =>
+          professores.find((prof) => prof.id === id)
+        )
+        .filter(Boolean) as Professor[];
+    }
+
     return [...professores];
   })();
 

@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 
-type OrdenacaoType = 'nome' | 'departamento' | 'antigas' | 'recentes';
+type OrdenacaoType = 'nome' | 'departamento' | 'antigas' | 'recentes' | 'id';
 
 interface DropdownProps {
   ordenacao : OrdenacaoType;
@@ -14,6 +14,7 @@ const getTextoOrdenacao = (ord: OrdenacaoType) => {
     case 'departamento': return 'Departamento';
     case 'antigas': return 'Mais Antigos';
     case 'recentes': return 'Recentes';
+    case 'id': return 'ID (RadixSort)';
     default: return 'Ordenar';
   }
 };
@@ -64,6 +65,12 @@ const DropdownOrdenar: React.FC<DropdownProps> = ({ ordenacao, setOrdenacao }) =
             className='hover:bg-gray-200 hover:text-black px-4 py-2 text-left rounded-xl'
           >
             Recentes
+          </button>
+          <button
+            onClick={() => { setOrdenacao('id'); setOpen(false); }}
+            className='hover:bg-gray-200 hover:text-black px-4 py-2 text-left rounded-xl'
+          >
+            ID (RadixSort)
           </button>
         </div>
       )}
