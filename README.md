@@ -124,3 +124,52 @@ Motivação: `RadixSort` é apropriado para ordenar inteiros (IDs, chaves numér
    - Estabilidade: MergeSort quando a ordem relativa deve ser preservada.
    - Simplicidade/overhead: InsertionSort para pequenas partições.
 
+### Screenshot
+
+# Demonstração dos Algoritmos de Ordenação
+
+## QuickSort
+  
+Implementação baseada em divisão e conquista (*divide and conquer*).
+
+![QuickSort](./images/quick.jpeg)
+
+---
+
+## MergeSort
+
+Algoritmo estável utilizado para ordenação de avaliações e notificações por data.
+
+![MergeSort](./images/mergesort.jpeg)
+
+---
+
+## MergeSort no Terminal
+
+Execução e validação do MergeSort integrado ao backend de notificações.
+
+![MergeSort Terminal](./images/mergesortterminal.jpeg)
+
+---
+
+## InsertionSort
+
+Algoritmo utilizado para ordenação de listas pequenas, como matérias no modal de avaliação.
+
+![InsertionSort](./images/insertion.jpeg)
+
+---
+
+## RadixSort
+
+Algoritmo não comparativo utilizado para ordenação numérica por ID.
+
+![RadixSort](./images/radix.jpeg)
+
+---
+
+## Testes dos Algoritmos
+
+Execução dos testes unitários e validação dos algoritmos implementados.
+
+![Testes](./images/testealgoritmos.jpeg)
